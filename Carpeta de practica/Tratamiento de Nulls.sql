@@ -14,7 +14,7 @@ from Sales.Orders;
 /* IsNull | Coalesce */
 -- Manejar el NULL antes de hacer agregaciones de datos en la BD
 -- Supongamos que el negocio (como muchos otros entiende que el NULL es un 0 para el 
--- calculo de las ventas promedio por suponer el año o el mes
+-- calculo de las ventas promedio por suponer el aï¿½o o el mes
 -- de dicha forma deberemos de manejar los nulos antes de proceder con cualquier otro analisis muchas veces
 
 -- * en este caso debo hallar el score promedio de los vendedores
@@ -167,12 +167,12 @@ select
 	CustomerID,
 	FirstName,
 	LastName,
-	len(FirstName) tamaño_nombre,
-	len(LastName) tamaño_apellido,
+	len(FirstName) tamano_nombre,
+	len(LastName) tamano_apellido,
 	FirstName + coalesce(LastName,'') NombreCompleto_1,
 	DATALENGTH(FirstName + coalesce(LastName,'')) [Nombre completo sin espacio],
 	FirstName + ' ' + coalesce(LastName,'') NombreCompleto_2,
 	DATALENGTH(FirstName + ' ' + coalesce(LastName,'')) [Nombre completo sumado el espacio]
 from Sales.Customers
 
--- en todos los casos sume un espacio en blanco para el nombre o lo quite para ver la variacion del tamaño
+-- en todos los casos sume un espacio en blanco para el nombre o lo quite para ver la variacion del tamaï¿½o

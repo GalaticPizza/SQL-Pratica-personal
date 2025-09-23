@@ -16,18 +16,18 @@ INSERT INTO avion (aid, aname, cruisingrange) VALUES
 (31, 'Gulfstream G650', 7903);
 
 INSERT INTO empleados (eid, ename, salary) VALUES
-(600000000, 'Oscar Hall', 51995),
-(600000001, 'Natalie Lewis', 186609),
-(600000002, 'Victor Rivera', 40095),
-(600000003, 'Andrea Clark', 173734),
-(600000004, 'Jason Lee', 247098),
-(600000005, 'Emily Walker', 77388),
-(600000006, 'Daniel Scott', 147012),
-(600000007, 'Hannah Green', 90210),
-(600000008, 'Jose Allen', 158693),
-(600000009, 'Amy King', 222914);
+(0, 'Oscar Hall', 51995),
+(1, 'Natalie Lewis', 186609),
+(2, 'Victor Rivera', 40095),
+(3, 'Andrea Clark', 173734),
+(4, 'Jason Lee', 247098),
+(5, 'Emily Walker', 77388),
+(6, 'Daniel Scott', 147012),
+(7, 'Hannah Green', 90210),
+(8, 'Jose Allen', 158693),
+(9, 'Amy King', 222914);
 
-INSERT INTO vuelos (flno, from, to, distance, departs, arrives) VALUES
+INSERT INTO vuelos (flno, from_city, to_city, distance, departs, arrives) VALUES
 (2000, 'Denver', 'Seattle', 570, '15:25:21', '18:14:21'),
 (2001, 'Seattle', 'Orlando', 913, '15:09:41', '20:00:41'),
 (2002, 'Houston', 'Seattle', 1470, '06:17:34', '07:21:34'),
@@ -50,8 +50,8 @@ INSERT INTO vuelos (flno, from, to, distance, departs, arrives) VALUES
 (2019, 'Phoenix', 'Miami', 1920, '07:40:00', '10:55:00');
 
 INSERT INTO certificados (eid, aid) VALUES
-(600000000, 12), (600000000, 27), (600000000, 16), (600000000, 6),
-(600000001, 9),  (600000001, 24), (600000001, 17), (600000001, 5),
-(600000002, 3),  (600000002, 10), (600000002, 18), (600000002, 26),
-(600000003, 1),  (600000003, 6),  (600000003, 12), (600000003, 21),
-(600000004, 8),  (600000004, 25), (600000004, 20), (600000004, 11);
+(0, 28), (0, 27), (0, 22), (0, 26),
+(1, 19),  (1, 24), (1, 17), (1, 25),
+(2, 31),  (2, 21), (2, 18), (2, 26),
+(3, 24),  (3, 17),  (3, 22), (3, 21),
+(4, 28),  (4, 25), (4, 20), (4, 21);

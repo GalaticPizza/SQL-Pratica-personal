@@ -3,20 +3,15 @@
 /*
 1. Encuentre los snombres de Proveedores que provean alguna parte roja. 
 2. Encuentre los sids de Proveedores que provean alguna red o parte verde. 
-3. Encuentre los sids de Proveedores que provean alguna parte roja o vivan en 
-“221 Packer Street”. 
-4. Encuentre los sids de Proveedores que provean alguna parte roja Y alguna 
-parte verde. 
+3. Encuentre los sids de Proveedores que provean alguna parte roja o vivan en “221 Packer Street”. 
+4. Encuentre los sids de Proveedores que provean alguna parte roja Y alguna parte verde. 
 5. Encuentre los sids de Proveedores que provean cada parte. 
 6. Encuentre los sids de Proveedores que provean cada parte roja. 
 7. Encuentre los sids de Proveedores que provean cada parte verde o roja. 
-8. Encuentre los sids de Proveedores que provean cada parte roja o provean 
-cada parte verde. 
-9. Encuentre los pares de sids tal que los Proveedores con el primer sid cueste 
-mas por alguna parte que los proveedor del segundo sid. 
+8. Encuentre los sids de Proveedores que provean cada parte roja o provean cada parte verde. 
+9. Encuentre los pares de sids tal que los Proveedores con el primer sid cueste mas por alguna parte que los proveedor del segundo sid. 
 10. Encuentre los pids de partes provista por al menos dos proveedores diferentes. 
-11. Encuentre los pids de las aprtes mas caras provistas por el proveedor llamado 
-Yosemite Sham. 
+11. Encuentre los pids de las aprtes mas caras provistas por el proveedor llamado Yosemite Sham. 
 12. Encuentre los pids de partes provistas por cada proveedor a menos que $200. 
 (Si algún proveedor no provee las partes o cuesta igual o más de $200, las 
 partes no deberán ser listadas.) 
@@ -46,6 +41,23 @@ FROM  catalogo c NATURAL JOIN proveedores p
 				 NATURAL JOIN partes par
 WHERE  par.color LIKE '%rojo%';
 
+-- LEFT JOIN
+SELECT p.sname 
+FROM  catalogo c LEFT JOIN proveedores p
+			     ON p.sid = c.sid 
+				 LEFT JOIN partes par
+				 ON c.pid = par.pid 
+WHERE  par.color LIKE '%rojo%';
+
+-- RIGHT JOIN
+SELECT p.sname 
+FROM  catalogo c RIGHT JOIN proveedores p
+			     ON p.sid = c.sid 
+				 RIGHT JOIN partes par
+				 ON c.pid = par.pid 
+WHERE  par.color LIKE '%rojo%';
+
+
 -- CLAUSULA IN 
 
 SELECT p.sname 
@@ -58,13 +70,15 @@ WHERE p.sid IN (
 ORDER BY p.sname DESC;
 
 -- 2. Encuentre los sids de Proveedores que provean alguna red o parte verde. 
--- esta consulta es...tramposa
+-- esta consulta de abajo es...tramposa
 
 SELECT p.sid
 FROM proveedores p, partes par, catalogo c
 WHERE par.color LIKE '%rojo%' OR par.color LIKE '%verde%'
 ORDER BY p.sid;
 
+-- jamas olviden que al momento de realizar un producto cartesiano si deben de realizar filtrado deben hacerlo en el WHERE
+-- y las claves deben de las tablas donde deben coincidir deben estar en el where
 -- ====================================================
 SELECT p.sid 
 FROM  catalogo c INNER JOIN proveedores p
@@ -229,7 +243,13 @@ WHERE NOT EXISTS (
 
 -- ¿Como sabemos si lo siguiente es cierto? 
 -- Bueno las partes relacionadas a proveedores estan en el catalogo, podriamos contar cuantas coincidencias tendra cada
--- proveedor en la tabla y ordenarlo a la salida
+-- proveedor en la tabla y ordenarlo a la salida, como minimo deberian todos los proveedores la misma cantidad de partes de la tabla partes cada uno
+-- usando having
+
+SELECT c.pid
+FROM catalogo c 
+Group by c.pid
+HAVING count(distinct c.pid) = (select count(*) from partes);
 
 SELECT sid, COUNT(DISTINCT(pid)) cantidad_de_partes_por_proveedor
 FROM catalogo
